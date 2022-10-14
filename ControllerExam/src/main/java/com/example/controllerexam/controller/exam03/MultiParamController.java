@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@RequestParam 2개이상 사용하기
+// 어노테이션 : 주로 클래스나 함수위에 정의해서 새로운 기능을 추가하는 것
+//  ex)  @Controller, @GetMapping, @Setter , @RequestParam , @RequestMapping 등
 
 @Controller
 @RequestMapping("/exam03")

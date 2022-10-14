@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+</head>
+<body>
+<p>[[${list}]]</p>
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">부서번호</th>
+            <th scope="col">부서명</th>
+            <th scope="col">지역</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dept:${list}">
+            <td> [[${dept.num}]]</td>
+            <td> [[${dept.dno}]]</td>
+            <td> [[${dept.dName}]]</td>
+            <td> [[${dept.loc}]]</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

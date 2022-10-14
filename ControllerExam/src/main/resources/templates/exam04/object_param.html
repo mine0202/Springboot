@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <p>[[${member}]]</p>
+
+<!--  테이블 형태로 객체정보 출력하기 : bootstrap 사용하기 -->
+  <table class="table">
+      <thead class="thead-dark">
+      <tr>
+          <th scope="col">No</th>
+          <th scope="col">회원ID</th>
+          <th scope="col">회원NAME</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>1</td>
+          <td>[[${member.id}]]</td>
+          <td>[[${member.name}]]</td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+<!-- 자바스크립트를 사용할수 있게함-->
+  <script th:inline="javascript">
+      let obj = [[${member}]];
+      console.log(obj);
+  </script>
+
+</body>
+</html>

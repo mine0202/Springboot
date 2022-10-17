@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- mt-5  마진탑 5픽셀 -->
+<div class="container mt-5">
+<!--  입력폼 -->
+  <div>
+<!--    action 해당 주소로 post 방식으로 정보를 보냄 -->
+    <form action="/exam04/member/add" method="post">
+      <div class="mb-3">
+        <label for="eName" class="form-label"> 사원명 </label>
+        <input type="text" class="form-control" id="eName" required name="eName">
+      </div>
+      <div class="mb-3">
+        <label for="job" class="form-label">직위</label>
+        <input type="text" class="form-control" id="job" required name="job">
+      </div>
+        <div class="mb-3">
+        <label for="manager" class="form-label">매니저</label>
+        <input type="text" class="form-control" id="manager" required name="manager">
+      </div>
+<!--      서브밋 버튼 -->
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+</body>
+</html>

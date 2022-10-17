@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+  <!--    스프링부트 보내준 데이터 출력-->
+
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">사원번호</th>
+      <th scope="col">사원명</th>
+      <th scope="col">직위</th>
+      <th scope="col">매니저</th>
+      <th scope="col">등록일자</th>
+      <th scope="col">수정일자</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="member :${list2}">
+      <tr>
+        <th>[[${member.eno}]]</th>
+        <th>[[${member.eName}]]</th>
+        <th>[[${member.job}]]</th>
+        <th>[[${member.manager}]]</th>
+        <th>[[${member.insertTime}]]</th>
+        <th>[[${member.updateTime}]]</th>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+</div>
+
+
+<script th:inline="javascript">
+  let obj =[[${list}]];
+  console.log(obj);
+</script>
+</body>
+</html>

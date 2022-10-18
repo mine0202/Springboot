@@ -1,4 +1,4 @@
-package com.example.modelexam.service.exam04;
+package com.example.modelexam.service.exam07;
 
 import com.example.modelexam.dao.MemberDao;
 import com.example.modelexam.model.Member;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class Member04Service {
+public class Member07Service {
 
 //  @Autowired :  회원 DAO 객체 가져오기
     @Autowired
@@ -47,6 +47,16 @@ public class Member04Service {
             member.setInsertTime(LocalDateTime.now().format(dtf));
             list = memberDao.insert(member);  // DB 반영
         }
+        else {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            member.setUpdateTime(LocalDateTime.now().format(dtf));
+            list = memberDao.update(member);  // DB 반영
+        }
         return list;
+    }
+
+    public boolean removeById(int eno){
+        int iCount = memberDao.deleteById(eno);
+        return (iCount>0)? true:false;
     }
 }

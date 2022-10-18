@@ -1,4 +1,4 @@
-package com.example.modelexam.service.exam04;
+package com.example.modelexam.service.exam09;
 
 import com.example.modelexam.dao.MemberDao;
 import com.example.modelexam.model.Member;
@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 // @Service 서버가동시 스프링서버에서 객체를 만들어줌
 // 객체를 만들어주는 어노테이션 종류 : @Service , @Repository , @Component
 
 @Service
 @Slf4j
-public class Member04Service {
+public class Member09Service {
 
 //  @Autowired :  회원 DAO 객체 가져오기
     @Autowired
@@ -28,10 +29,10 @@ public class Member04Service {
         return list2;
     }
 
-    public  Member findById(int eno){
+    public Optional<Member> findById(int eno){
         Member member = memberDao.selectById(eno);
-
-        return member;
+        Optional<Member> optionalMember = Optional.ofNullable(member);
+        return optionalMember;
     }
 
     public  List<Member> save(Member member){
@@ -47,6 +48,16 @@ public class Member04Service {
             member.setInsertTime(LocalDateTime.now().format(dtf));
             list = memberDao.insert(member);  // DB 반영
         }
+        else {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            member.setUpdateTime(LocalDateTime.now().format(dtf));
+            list = memberDao.update(member);  // DB 반영
+        }
         return list;
+    }
+
+    public boolean removeById(int eno){
+        int iCount = memberDao.deleteById(eno);
+        return (iCount>0)? true:false;
     }
 }

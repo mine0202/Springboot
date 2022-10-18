@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- mt-5  마진탑 5픽셀 -->
+<div class="container mt-5">
+<!--  입력폼 -->
+  <div>
+<!--    action 해당 주소로 post 방식으로 정보를 보냄 -->
+<!--      html 에서 form 태그의 속성 method 에는 get, post 두개만 있음-->
+<!--      put, delete 는 springboot .properties 파일에 추가 설정 필요-->
+<!--      th:action="@{'이동페이지url'+${변수}}"  -->
+    <form th:action="@{'/exam05/dept/edit/'+${dept.dno}}" th:method="put">
+<!--        html 태그 hidden 태그 , 해당 데이터가 서버로 전송됨-->
+        <input type="hidden" name="dno" th:value="${dept.dno}">
+      <div class="mb-3">
+        <label for="dName" class="form-label">부서 이름</label>
+        <input type="text" class="form-control"
+               id="dName" required name="dName" th:value="${dept.dName}">
+      </div>
+      <div class="mb-3">
+        <label for="loc" class="form-label">부서 위치</label>
+        <input type="text" class="form-control"
+               id="loc" required name="loc" th:value="${dept.loc}">
+      </div>
+<!--      서브밋 버튼 -->
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<script th:inline="javascript">
+    let obj = [[${dept}]];
+    console.log(obj);
+</script>
+
+</body>
+</html>

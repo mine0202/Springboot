@@ -38,7 +38,6 @@ public class Member06Controller {
         log.debug("createMember 시작");
         memberService.save(member);
         log.debug("createMember 끝");
-
         return new RedirectView("/exam06/member");
     }
 

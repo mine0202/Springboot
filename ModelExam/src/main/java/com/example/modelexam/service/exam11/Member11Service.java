@@ -1,4 +1,4 @@
-package com.example.modelexam.service.exam09;
+package com.example.modelexam.service.exam11;
 
 import com.example.modelexam.dao.MemberDao;
 import com.example.modelexam.model.Member;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class Member09Service {
+public class Member11Service {
 
 //  @Autowired :  회원 DAO 객체 가져오기
     @Autowired

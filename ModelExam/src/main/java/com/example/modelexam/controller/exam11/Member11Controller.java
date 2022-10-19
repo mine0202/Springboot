@@ -1,8 +1,8 @@
-package com.example.modelexam.controller.exam09;
+package com.example.modelexam.controller.exam11;
 
 
 import com.example.modelexam.model.Member;
-import com.example.modelexam.service.exam09.Member09Service;
+import com.example.modelexam.service.exam11.Member11Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +14,11 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/exam09")
-public class Member09Controller {
+@RequestMapping("/exam11")
+public class Member11Controller {
 
     @Autowired
-    Member09Service memberService;
+    Member11Service memberService;
 
     @GetMapping("/member")
     public ResponseEntity<Object> getMemberAll(){
@@ -35,10 +35,6 @@ public class Member09Controller {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//    1) 연습문제 : 부서클래스를 참고하여
-//         Member08Service 클래스에 findById() 함수를 수정하세요( Optional 이용 )
-//         Member08Controller 클래스에 getMemberId() 함수를 추가하세요 ( Optional 이용 )
-//    단, Rest Client 이용한 출력을 하세요 ( Rest API 프로그램. @RestController 를 이용 )
 
     @GetMapping("/member/{eno}")
     public ResponseEntity<Object> getMemberId(@PathVariable int eno){
@@ -63,6 +59,33 @@ public class Member09Controller {
             return new ResponseEntity<>(list,HttpStatus.CREATED);
         }catch (Exception e){
             log.info(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/member/edit/{eno}")
+    public ResponseEntity<Object> updateMember(@PathVariable int eno, @RequestBody Member member){
+        try {
+            List<Member> list = memberService.save(member);
+            return new ResponseEntity<>(list,HttpStatus.OK);
+        }catch (Exception e){
+            log.info(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+//    eno 로 삭제하는 함수 deleteMember
+    @DeleteMapping("/member/delete/{eno}")
+    public ResponseEntity<Object> deleteMember(@PathVariable int eno){
+        try{
+            boolean bSuccess = memberService.removeById(eno);
+            if(bSuccess){
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    부트스트랩 링크-->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5 ">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">위치</th>
+            <th scope="col">등록일자</th>
+            <th scope="col">수정일자</th>
+        </tr>
+        </thead>
+        <tbody>
+<!-- 에러처리 dept.dno 가 null 일수 있는데 null포인트 에러가 발생함. 이를 대비해서 dept?.dno 로 코딩하면됨-->
+            <tr>
+                <th>[[${dept?.dno}]]</th>
+                <th>[[${dept?.dname}]]</th>
+                <th>[[${dept?.loc}]]</th>
+                <th>[[${dept?.insertTime}]]</th>
+                <th>[[${dept?.updateTime}]]</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script th:inline="javascript">
+    let obj =[[${dept}]];
+    console.log(obj);
+</script>
+</body>
+</html>

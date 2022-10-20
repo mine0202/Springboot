@@ -3,6 +3,7 @@ package com.example.jpaexam.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -31,23 +32,24 @@ import javax.persistence.*;
 )
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-public class Dept {
+public class Dept extends BaseTimeEntity{
 //    부서번호 dno
 //    @Id 기본키가 됨
 //    시퀀스 사용 : ORACLE / POSTGRE 등
 //    MYSQL / MARIA DB 는 increment 이용
 //    제너레이터의 이름을 SQ_DEPT_GENERATOR 으로 정하여 입력
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE
+    @Id  // 테이블에 하나이상의 기본키가 필요하므로 변하지 않는 값을 기본키로 만듬
+    @GeneratedValue(strategy = GenerationType.SEQUENCE   // 시퀀스사용
                     , generator = "SQ_DEPT_GENERATOR"
     )
     private Integer dno;  // 10씩 증가하게 하려함 , 오라클에서는 시퀀스를 사용
 //    부서명 dname
 //    컬럼 상태를 지정해줘야함
-    @Column(columnDefinition = "VARCHAR2(255)")
+    @Column(columnDefinition = "VARCHAR2(255)")   // 해당컬럼을 이렇게 만들도록 지시
     private String dname;
 //    지역 loc
     @Column(columnDefinition = "VARCHAR2(255)")

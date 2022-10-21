@@ -26,11 +26,11 @@
       </div>
         <div class="mb-3">
         <label for="manager" class="form-label">매니저</label>
-        <input type="number" class="form-control" id="manager" required name="manager">
+        <input type="number" class="form-control" id="manager" name="manager" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">
       </div>
         <div class="mb-3">
             <label for="hiredate" class="form-label">입사일</label>
-            <input type="text" class="form-control" id="hiredate" required name="hiredate" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')">
+            <input type="text" class="form-control" id="hiredate" required name="hiredate" >
         </div>
         <div class="mb-3">
             <label for="salary" class="form-label">월급</label>
@@ -38,11 +38,11 @@
         </div>
         <div class="mb-3">
             <label for="commission" class="form-label">커미션</label>
-            <input type="number" class="form-control" id="commission" >
+            <input type="number" class="form-control" id="commission" name="commission" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" >
         </div>
         <div class="mb-3">
             <label for="dno" class="form-label">부서 번호</label>
-            <input type="number" class="form-control" id="dno" required name="dno" >
+            <input type="number" class="form-control" id="dno" required name="dno" onKeyup="this.value=this.value.replace(/[^0-9]/g,'')" >
         </div>
 <!--      서브밋 버튼 -->
       <div class="mb-3">

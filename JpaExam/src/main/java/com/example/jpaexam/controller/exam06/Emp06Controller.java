@@ -71,6 +71,11 @@ public class Emp06Controller {
         return new RedirectView("/exam06/emp");
     }
 
+//    Emp 컨트롤러/서비스 클래스의  .deleteEmp() 함수를 추가
+//     exam06/emp/update_emp.html 페이지를 삭제 버튼 추가 , 제출버튼을 클릭하면 회원이 삭제되도록
+//    컨트롤러/서비스 함수를 정의하세요.
+//    단, 회원이 삭제되면 첫페이지로 Redirect 될 수 있도록 하세요.
+
     @DeleteMapping("/emp/delete/{eno}")
     public RedirectView deleteEmp(@PathVariable int eno){
         try{

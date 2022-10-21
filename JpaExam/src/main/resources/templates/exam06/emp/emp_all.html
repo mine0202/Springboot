@@ -16,22 +16,23 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">사원번호</th>
-            <th scope="col">사원이름</th>
+            <th scope="col">사원<br>번호</th>
+            <th scope="col">사원<br>이름</th>
             <th scope="col">업무</th>
             <th scope="col">매니저</th>
-            <th scope="col">고용일자</th>
+            <th scope="col">고용<br>일자</th>
             <th scope="col">월급</th>
-            <th scope="col">인센티브</th>
-            <th scope="col">부서번호</th>
+            <th scope="col">커미션</th>
+            <th scope="col">부서<br>번호</th>
             <th scope="col">생성일자</th>
             <th scope="col">수정일자</th>
+            <th scope="col">삭제</th>
         </tr>
         </thead>
         <tbody>
         <th:block th:each="emp :${list}">
             <tr>
-                <th><a th:href="@{'/exam06/emp/edition/'+${emp.eno}}" >[[${emp.eno}]]</a></th>
+                <th><a th:href="@{'/exam06/emp/edition/'+${emp.eno}}" >[[${emp.eno}]]<br>수정</a></th>
                 <th>[[${emp.ename}]]</th>
                 <th>[[${emp.job}]]</th>
                 <th>[[${emp.manager}]]</th>
@@ -41,6 +42,13 @@
                 <th>[[${emp.dno}]]</th>
                 <th>[[${emp.insertTime}]]</th>
                 <th>[[${emp.updateTime}]]</th>
+                <th>
+                    <!--      삭제 폼 추가-->
+                    <form id="delete-form" th:action="@{'/exam06/emp/delete/'+${emp.eno}}"
+                          th:method="delete">
+                        <button type="submit" class="btn btn-outline-danger" > Delete </button>
+                    </form>
+                </th>
             </tr>
         </th:block>
         </tbody>

@@ -56,15 +56,22 @@ public class DeptService {
         return list;
     }
 
+//    sql : select * from tb_dept order by dno asc;
+//    sql 문을 오히려 더 잘 알아야함, 콘솔보고 잘 분석해서 잘 날아가는지 알아야함
+    public List<Dept> findAllAsc(){
+        List<Dept> list = deptRepository.findALlByOrderByDnoAsc();  // 전체조회 dno 오름차순
+        return list;
+    }
+
+
     public List<Dept> findAllDnameAsc(){
-//         JPA 가 findAll 등을 자동으로 만들어줌
-        List<Dept> list = deptRepository.findAllByOrderByDnameAsc(); // 전체조회 dno 내림차순
+        List<Dept> list = deptRepository.findAllByOrderByDnameAsc(); // 전체조회 dname 오름차순
         return list;
     }
 
     public List<Dept> findAllDnameDesc(String dname){
 //         JPA 가 findAll 등을 자동으로 만들어줌
-        List<Dept> list = deptRepository.findAllByDnameContainingOrderByDnameDesc(dname); // 전체조회 dno 내림차순
+        List<Dept> list = deptRepository.findAllByDnameContainingOrderByDnameDesc(dname); // 전체조회 dname 내림차순
         return list;
     }
 }

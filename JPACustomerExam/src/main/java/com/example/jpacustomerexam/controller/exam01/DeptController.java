@@ -106,8 +106,8 @@ public class DeptController {
     }
 
 //    desc 내림차순
-    @GetMapping("/dept/desc")
-    public ResponseEntity<Object> getDeptAllDesc(){
+    @GetMapping("/dept/dno/desc")
+    public ResponseEntity<Object> getDeptAllDnoDesc(){
         try{
             List<Dept> list = deptService.findAllDesc(); // 내림차순 정렬 전체조회
             if( list.isEmpty()== false){
@@ -122,6 +122,25 @@ public class DeptController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/dept/dno/asc")
+    public ResponseEntity<Object> getDeptAllDnoAsc(){
+        try{
+            List<Dept> list = deptService.findAllAsc();
+            if (list.isEmpty()== false){
+                return new ResponseEntity<>(list, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        }catch (Exception e){
+            log.debug(e.getMessage());
+//            서버 접속 에러 메세지를 클라이언트에 전송
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping("/dept/dname/asc")
     public ResponseEntity<Object> getDeptAllDnameAsc(){

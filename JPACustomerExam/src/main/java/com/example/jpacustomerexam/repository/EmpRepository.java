@@ -1,7 +1,10 @@
 package com.example.jpacustomerexam.repository;
 
+import com.example.jpacustomerexam.dto.EmpGroupDto;
 import com.example.jpacustomerexam.model.Emp;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,5 +65,76 @@ public interface EmpRepository extends JpaRepository<Emp,Integer> {
 
     List<Emp> findAllByCommissionIsOrCommissionIsOrCommissionIs(int a,int b ,int c);
 
+//##################################################################
+//    exam @Query
+//##################################################################
+
+//    ename 으로 like 검색하는 함수를 정의
+//     @Query 사용, native query 로 작성
+@Query(value = "select e.* from tb_emp e where e.ename like %:ename%",nativeQuery = true)
+    List<Emp> selectEname(@Param("ename") String ename);
+
+//    salary 내림차순, ename 오름차순으로 정렬하는 함수를 작성하세요
+    //     @Query 사용, native query 로 작성
+//    쿼리 변수는 매개변수
+
+    @Query(value = "select e.* from tb_emp e order by e.salary desc , e.ename asc",nativeQuery = true)
+    List<Emp> selectDescAsc();
+
+
+//    commission 이 null 이고 , salary가 매개변수값보다 같거나 큰 사원 정보를 출력
+    //     @Query 사용, native query 로 작성
+//    sql 문에 매개변수 사용을 위해서  :변수명 으로 입력
+    @Query(value = "select e.* from tb_emp e where e.commission is null and e.salary>= :salary ",nativeQuery = true)
+    List<Emp> selectCommissionSalary(@Param("salary") Integer salary);
+
+
+//    1982년도에 입사한 사원 출력하는 함수를 정의
+//    입사일은 내림차순 정렬
+@Query(value = "select e.* from tb_emp e where e.hiredate like %:hiredate% ",nativeQuery = true)
+    List<Emp> selectHiredate(@Param("hiredate") String hiredate);
+
+
+
+//    부서별, 직위별 월 급여 합계를 출력하는 함수를 정의
+//    단 dto만들어서 사용
+@Query(value = "select e.dno, e.job, sum(e.salary) as sumSalary from tb_emp e group by e.dno, e.job order by e.dno",nativeQuery = true)
+    List<EmpGroupDto> sumSalary();
+
+// 부서별 평균 월급여를 출력하는 함수를 작성
+//    단, 소수점은 절삭
+@Query(value = "select e.dno," +
+        " trunc(avg(e.salary)) as truncSal " +
+        "from tb_emp e group by e.dno " +
+        "order by e.dno",nativeQuery = true)
+List<EmpGroupDto> truncSalary();
+
+//    부서별 최고급여 중에서 3000이상인 사원만 조회하는 함수
+@Query(value = "select e.dno, " +
+        "max(e.salary) as maxSal " +
+        "from tb_emp e " +
+        "group by e.dno having max(e.salary) >= 3000",nativeQuery = true)
+List<EmpGroupDto> maxSalary();
+
+
+//    job 이 'MANAGER' 가 아니고 job 별 월급 합계가 5000 이상되는 사원의 정보를 출력하는 함수
+//     단 월급여 합계로 오름차순 정렬
+    @Query(value = "select  job, " +
+        "sum(salary) as sumSal from tb_emp " +
+        "group by job " +
+        "having sum(salary) >=5000 " +
+        "and job != 'MANAGER' " +
+        "order by sum(salary) asc ",nativeQuery = true)
+    List<EmpGroupDto> sumSalaryJob();
+
+//    사원의 총수와 최고급여를 출력
+    @Query(value = "select count(ename) as countVar, max(salary) as maxSal from tb_emp", nativeQuery = true)
+    List<EmpGroupDto> selectCountMax();
+
+
+//    사원테이블에서 가장 오래된 사원의 입사일과 가장 빠른 사원의 입사일을 출력
+//    필요하면 DTO 를 이용
+    @Query(value = "select min(hiredate) as Old , max(hiredate) as Young from tb_emp",nativeQuery = true)
+    List<EmpGroupDto> selectOldYoung();
 
 }

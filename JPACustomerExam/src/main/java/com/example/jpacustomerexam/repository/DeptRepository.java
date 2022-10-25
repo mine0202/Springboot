@@ -117,6 +117,37 @@ public interface DeptRepository extends JpaRepository<Dept, Integer> {
 
 
 
+//    연습
+//    sql 기본 내장 함수를 사용하는 쿼리를 작성하고 함수로 정의하세요
+//    sql 함수 : upper(컬럼명) , lower(컬럼명) , length(컬럼명), substr(컬럼명,1,2)
+//    부서명( dname )  을 넣어서 출력
+//    인터페이스에는 속성을 넣을 수 없어서 getter 형태로 넣어야함
+    @Query(value = "select upper(d.dname) as upperVar, " +
+            "lower(d.dname) as lowerVar, " +
+            "length(d.dname) as lengthVar, " +
+            "substr(d.dname,1,2) as substrVar, " +
+            "trim('Oracle Mania ') as thrimVar, " +
+            "trunc(98.123) as truncVar, " +
+            "to_char(sysdate, 'yyyy-MM-dd') as charVar " +
+            "FROM tb_dept d ",nativeQuery = true)
+    List<DeptGroupDto> selectByBasicFunc();
+
+
+    // case when ( sql 조건문 사용 )
+//    dno 가 20 보다  작으면 ' 연말보너스 : 100% ' 출력
+//    dno 가 20보다 크면 '연말 보너스 : 200% ' 출력함수를 작성
+//    둘다 아니면 '연말 보너스 : 없음' 출력
+    @Query(value = "select d.dno" +
+            " ,case when d.dno < 20 then '연말 보너스 : 100%'" +
+            "  when d.dno > 20 then '연말 보너스 : 200%'" +
+            "  else '연말 보너스 : 없음'" +
+            "  end as incentive " +
+            "from tb_dept d"
+            ,nativeQuery = true)
+    List<DeptGroupDto> selectByCase();
+
+
+
 
 //    3. QueryDsl 언어를 이용하는 방식
 

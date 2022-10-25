@@ -82,6 +82,36 @@ public class Dept02Controller {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/dept/basicfunc/dname")
+    public ResponseEntity<Object> selectByBasicFunc(){
+        try{
+            List<DeptGroupDto> list = deptService.selectByBasicFunc();
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/dept/basicfunc/case")
+    public ResponseEntity<Object> selectByCase(){
+        try{
+            List<DeptGroupDto> list = deptService.selectByCase();
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

@@ -20,4 +20,14 @@ public interface DeptGroupDto {
 
     String getTextVar();
 
+    String getUpperVar();
+    String getLowerVar();
+    String getLengthVar();
+    String getSubstrVar();
+    String getThrimVar();
+    String getTruncVar();
+    String getCharVar();
+
+    String getIncentive();
+
 }

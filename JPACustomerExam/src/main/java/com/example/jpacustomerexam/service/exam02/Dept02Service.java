@@ -34,4 +34,14 @@ public class Dept02Service {
         List<DeptGroupDto> list = deptRepository.selectByDnoFunc(dno);
         return list;
     }
+    public List<DeptGroupDto> selectByBasicFunc(){
+        List<DeptGroupDto> list = deptRepository.selectByBasicFunc();
+        return list;
+    }
+    public List<DeptGroupDto> selectByCase(){
+        List<DeptGroupDto> list = deptRepository.selectByCase();
+        return list;
+    }
+
+
 }

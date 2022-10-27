@@ -1,8 +1,7 @@
-package com.example.jpacustomerexam.repository.exam03;
+package com.example.jpacustomexam.repository.exam03;
 
-
-import com.example.jpacustomerexam.dto.DeptGroupDto;
-import com.example.jpacustomerexam.model.Dept;
+import com.example.jpacustomexam.dto.DeptGroupDto;
+import com.example.jpacustomexam.model.Dept;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,20 +9,34 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-// 페이징 처리 : 한번에 화면에 보여줄 개수 를 1페이지로 정해서 프로그램에서 나타내는것 ( 한페이지에 10개씩, 20개씩 .. )
-// page : 한 페이지 번호
-// size : 전체 페이지 수
-// currentpage :  현재 페이지 번호
-// totalItems : 전체 데이터 총건수
-// totalpages : 전체 페이지 수
+import java.util.List;
 
+/**
+ * packageName : com.example.jpaexam.repository
+ * fileName : DeptRepository
+ * author : ds
+ * date : 2022-10-20
+ * description : JPA 페이징 처리 함수 만들기
+ * 페이징 처리 ? 한번에 화면에 보여줄 개수 를 1페이지로 정해서 프로그램에서 나타내는 것
+ * page : 현재 페이지 번호
+ * size : 전체 페이지 수
+ * currentpage : 현재 페이지 번호
+ * totalItems : 전체 데이터 총건수
+ * totalpages : 전체 페이지 수
+ * ===========================================================
+ * DATE            AUTHOR             NOTE
+ * —————————————————————————————
+ * 2022-10-20         ds          최초 생성
+ */
 @Repository
 public interface Dept03Repository extends JpaRepository<Dept, Integer> {
-//  exam 03
-//    쿼리메소드 방식 사용
-//     전체 부서 정보 조회시 페이징 처리함수
+    //    exam03
+//    1 : 쿼리 메소드 방식 이용
+//    페이지 이용하는 법 : 페이지 객체를 사용하면 JPA 쿼리를 자동 생성함
+//       1) Pageable : 매개변수 객체 사용
+//       2) Page : 리턴갑 사용
+//    사용법 ex) Page<클래스명> 함수명(Pageable pageable)
     Page<Dept> findAllByOrderByDnoDesc(Pageable pageable);
-
 
 //    문제 1) findAll : 전체 부서조회 함수에 페이징 처리 로직을 추가하세요.
 //    기본함수로 제공함 : findAll(Pageable pageable)
@@ -84,7 +97,7 @@ public interface Dept03Repository extends JpaRepository<Dept, Integer> {
     )
     Page<DeptGroupDto> selectByCustomDeptPage(Pageable pageable);
 
-    //    문제 4) 아래 쿼리를 페이징 처리 로직을 추가해서 함수를 수정하세요.
+//    문제 4) 아래 쿼리를 페이징 처리 로직을 추가해서 함수를 수정하세요.
     @Query(value = "select d.dno" +
             "     ,case when d.dno < 20 then '연말 보너스 : 100%'" +
             "     when d.dno > 20 then '연말 보너스 : 200%'" +
@@ -96,3 +109,12 @@ public interface Dept03Repository extends JpaRepository<Dept, Integer> {
     Page<DeptGroupDto> selectByCasePage(Pageable pageable);
 
 }
+
+
+
+
+
+
+
+
+

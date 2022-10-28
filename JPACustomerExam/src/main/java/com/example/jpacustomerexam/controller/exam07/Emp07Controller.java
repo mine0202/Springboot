@@ -1,5 +1,6 @@
 package com.example.jpacustomerexam.controller.exam07;
 
+import com.example.jpacustomerexam.dto.querydsl.EmpGroupQueryDto;
 import com.example.jpacustomerexam.model.exam04.Department;
 import com.example.jpacustomerexam.model.exam04.Employee;
 import com.example.jpacustomerexam.service.exam07.Dept07Service;
@@ -45,6 +46,55 @@ public class Emp07Controller {
     public ResponseEntity<Object> querydslByEnameAndJob(@PathVariable String ename, @PathVariable String job){
         try{
             List<Employee> list = empService.querydslByEnameAndJob(ename, job);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/emp/querydsl/ename/querydslBySalary")
+    public ResponseEntity<Object> querydslBySalary(){
+        try{
+            List<EmpGroupQueryDto> list = empService.querydslBySalary();
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/emp/querydsl/querydslByCommission/{commission}")
+    public ResponseEntity<Object> querydslByCommission(@PathVariable int commission){
+        try{
+            List<Employee> list = empService.querydslByCommission(commission);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/emp/querydsl/querydslByHiredate/{start}&{end}")
+    public ResponseEntity<Object> querydslByHiredate(@PathVariable String start, @PathVariable String end){
+        try{
+            List<Employee> list = empService.querydslByHiredate(start, end);
 
             if( list.isEmpty()== false){
                 return new ResponseEntity<>(list,HttpStatus.OK);

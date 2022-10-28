@@ -2,6 +2,7 @@ package com.example.jpacustomerexam.controller.exam07;
 
 import com.example.jpacustomerexam.dto.DeptEmpClassDto;
 import com.example.jpacustomerexam.dto.DeptEmpDto;
+import com.example.jpacustomerexam.dto.querydsl.DeptGroupQueryDto;
 import com.example.jpacustomerexam.model.exam04.Department;
 import com.example.jpacustomerexam.service.exam04.Dept04Service;
 import com.example.jpacustomerexam.service.exam07.Dept07Service;
@@ -46,6 +47,40 @@ public class Dept07Controller {
     public ResponseEntity<Object> querydslByDnameAndLoc(@PathVariable String dname, @PathVariable String loc){
         try{
             List<Department> list = deptService.querydslByDnameAndLoc(dname, loc);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/groupfunc")
+    public ResponseEntity<Object> querydslByGroupfunc(){
+        try{
+            List<DeptGroupQueryDto> list = deptService.querydslByGroupfunc();
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/querydslByDeptGt/{dno}")
+    public ResponseEntity<Object> querydslByDeptGt(@PathVariable int dno){
+        try{
+            List<Department> list = deptService.querydslByDeptGt(dno);
 
             if( list.isEmpty()== false){
                 return new ResponseEntity<>(list,HttpStatus.OK);

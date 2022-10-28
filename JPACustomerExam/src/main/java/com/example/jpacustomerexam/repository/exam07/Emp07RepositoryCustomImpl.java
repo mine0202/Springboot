@@ -1,9 +1,11 @@
 package com.example.jpacustomerexam.repository.exam07;
 
 
+import com.example.jpacustomerexam.dto.querydsl.EmpGroupQueryDto;
 import com.example.jpacustomerexam.model.exam04.Employee;
 import com.example.jpacustomerexam.model.exam04.QDepartment;
 import com.example.jpacustomerexam.model.exam04.QEmployee;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,4 +45,43 @@ public class Emp07RepositoryCustomImpl implements Emp07RepositoryCustom {
                 ).fetch();
         return list;
     }
+
+//    사원테이블의 count, sum, avg , max, min 값을 출력하세요
+//     EmpGroupQDTO 만들어서 위의 속성값들을 출력하는 함수를 만드세요.'
+    @Override
+    public List<EmpGroupQueryDto> querydslBySalary() {
+        List<EmpGroupQueryDto> list = queryFactory.select(
+                        Projections.fields(
+                                EmpGroupQueryDto.class,
+                                employee.salary.count().as("countVar"),
+                                employee.salary.sum().as("sumVar"),
+                                employee.salary.avg().as("avgVar"),
+                                employee.salary.max().as("maxVar"),
+                                employee.salary.min().as("minVar")
+                        )
+                ).from(employee)
+                .fetch();
+        return list;
+    }
+
+//    커미션이 500이상인 사원정보를 출력하는 함수를 작성하세요
+    @Override
+    public List<Employee> querydslByCommission(int commission) {
+        List<Employee> list = queryFactory.selectFrom(employee)
+                .where(
+                        employee.commission.gt(commission)
+
+                ).fetch();
+        return list;
+    }
+
+    @Override
+    public List<Employee> querydslByHiredate(String start, String end) {
+        List<Employee> list = queryFactory.selectFrom(employee)
+                .where(
+                        employee.hiredate.between(start, end)
+                ).fetch();
+        return list;
+    }
+
 }

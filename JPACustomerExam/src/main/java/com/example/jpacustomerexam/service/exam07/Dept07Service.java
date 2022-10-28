@@ -1,5 +1,6 @@
 package com.example.jpacustomerexam.service.exam07;
 
+import com.example.jpacustomerexam.dto.querydsl.DeptGroupQueryDto;
 import com.example.jpacustomerexam.model.exam04.Department;
 import com.example.jpacustomerexam.repository.exam07.Dept07Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,15 @@ public class Dept07Service {
 
     public List<Department> querydslByDnameAndLoc(String dname, String loc){
         List<Department> list = deptRepository.querydslByDnameAndLoc(dname, loc);
+        return list;
+    }
+
+    public List<DeptGroupQueryDto> querydslByGroupfunc(){
+        List<DeptGroupQueryDto> list = deptRepository.querydslByGroupfunc();
+        return list;
+    }
+    public List<Department> querydslByDeptGt(int dno){
+        List<Department> list = deptRepository.querydslByDeptGt(dno);
         return list;
     }
 

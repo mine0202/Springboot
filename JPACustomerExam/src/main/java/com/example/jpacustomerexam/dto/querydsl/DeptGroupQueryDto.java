@@ -18,5 +18,13 @@ public class DeptGroupQueryDto {
     Integer maxVar;
     Integer minVar;
 
+//     upper, lower, substr  을 사용하기위해 속성만듬
+    String upperVar;
+    String lowerVar;
+    String substrVar;
 
+    String caseString;
+
+    Long dno;
+    Long dnoCount;
 }

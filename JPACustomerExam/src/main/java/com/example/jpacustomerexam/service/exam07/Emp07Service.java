@@ -38,4 +38,8 @@ public class Emp07Service {
         List<Employee> list = empRepository.querydslByHiredate(start, end);
         return list;
     }
+    public List<EmpGroupQueryDto> querydslByDnoJobSalary(){
+        List<EmpGroupQueryDto> list = empRepository.querydslByDnoJobSalary();
+        return list;
+    }
 }

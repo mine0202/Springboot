@@ -84,4 +84,23 @@ public class Emp07RepositoryCustomImpl implements Emp07RepositoryCustom {
         return list;
     }
 
+//    dno, job 별 월급여를 출력하는 함수
+//    힌트, groupBy(속성1, 속성2...)  employee 와 department 가 join 되어있으므로
+//     demployee.department.dno 를 부르면됨
+    @Override
+    public List<EmpGroupQueryDto> querydslByDnoJobSalary() {
+        List<EmpGroupQueryDto> list = queryFactory.select(
+                        Projections.fields(
+                                EmpGroupQueryDto.class,
+                                department.dno.as("depDno"),
+                                employee.job.as("job"),
+                                employee.salary.sum().as("sumVar")
+                        )
+                ).from(employee)
+                .groupBy(employee.department.dno, employee.job)
+                .orderBy(department.dno.asc())
+                .fetch();
+        return list;
+    }
+
 }

@@ -18,4 +18,7 @@ public class EmpGroupQueryDto {
     Integer maxVar;
     Integer minVar;
 
+    Integer depDno;
+    String job;
+
 }

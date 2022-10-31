@@ -23,4 +23,6 @@ public interface Emp07RepositoryCustom {
     //    1982년도에 입사한 사원 출력하기
     List<Employee> querydslByHiredate(String start, String end);
 
+    List<EmpGroupQueryDto> querydslByDnoJobSalary();
+
 }

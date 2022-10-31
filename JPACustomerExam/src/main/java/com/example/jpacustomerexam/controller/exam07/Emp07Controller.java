@@ -107,6 +107,22 @@ public class Emp07Controller {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/emp/querydsl/querydslByDnoJobSalary")
+    public ResponseEntity<Object> querydslByDnoJobSalary(){
+        try{
+            List<EmpGroupQueryDto> list = empService.querydslByDnoJobSalary();
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

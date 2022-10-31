@@ -93,6 +93,105 @@ public class Dept07Controller {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/dept/querydsl/querydslByBasicFunc")
+    public ResponseEntity<Object> querydslByBasicFunc(){
+        try{
+            List<DeptGroupQueryDto> list = deptService.querydslByBasicFunc();
 
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/dept/querydsl/querydslByCasewhen")
+    public ResponseEntity<Object> querydslByCasewhen(){
+        try{
+            List<DeptGroupQueryDto> list = deptService.querydslByCasewhen();
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/querydslByDnoGroup/{countDno}")
+    public ResponseEntity<Object> querydslByDnoGroup(@PathVariable long countDno){
+        try{
+            List<DeptGroupQueryDto> list = deptService.querydslByDnoGroup(countDno);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/querydslByDnameJoin/{dname}")
+    public ResponseEntity<Object> querydslByDnameJoin(@PathVariable String dname){
+        try{
+            List<DeptEmpClassDto> list = deptService.querydslByDnameJoin(dname);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/querydslByDnameJoin2/{dname}")
+    public ResponseEntity<Object> querydslByDnameJoin2(@PathVariable String dname){
+        try{
+            List<DeptEmpClassDto> list = deptService.querydslByDnameJoin2(dname);
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/dept/querydsl/querydslByDnoSub")
+    public ResponseEntity<Object> querydslByDnoSub(){
+        try{
+            List<Department> list = deptService.querydslByDnoSub();
+
+            if( list.isEmpty()== false){
+                return new ResponseEntity<>(list,HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
